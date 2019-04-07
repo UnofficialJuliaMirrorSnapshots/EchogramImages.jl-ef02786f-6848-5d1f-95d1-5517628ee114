@@ -1,0 +1,18 @@
+name = "EchogramImages"
+uuid = "ef02786f-6848-5d1f-95d1-5517628ee114"
+authors = ["Rob Blackwell <rob@robblackwell.com>"]
+repo = "https://github.com/EchoJulia/EchogramImages.jl.git"
+
+[deps]
+ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
+ColorTypes = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+EchogramColorSchemes = "4c5cd976-4938-5223-a900-acc20a7c8507"
+Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
+IndirectArrays = "9b13fd28-a010-5f03-acff-a1bbcff69959"
+MappedArrays = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
