@@ -28,7 +28,7 @@ vmin and vmax are minimum and maximum values.
 
 
 """
-function imagesc(A;
+function imagesc(A::AbstractArray;
                   vmin = nothing,
                   vmax = nothing,
                   cmap= nothing,
@@ -63,7 +63,8 @@ function imagesc(A;
     g = x -> (clamp(isnan(x) ? vmin : x, vmin, vmax) - vmin) / (vmax - vmin)
     f = s->clamp(round(Int, (n-1)*g(s))+1, 1, n)
 
-    Ai = mappedarray(f, A) # like f.(A) but does not allocate significant memory
+    Ai = f.(A)
+    #Ai = mappedarray(f, A) # like f.(A) but does not allocate significant memory
     IndirectArray(Ai, cmap) # colormap array
 
 end
