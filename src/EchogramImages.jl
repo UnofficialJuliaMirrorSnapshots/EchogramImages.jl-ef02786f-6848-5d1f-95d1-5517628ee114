@@ -1,8 +1,6 @@
 module EchogramImages
 
 using Images
-using MappedArrays
-using IndirectArrays
 using EchogramColorSchemes
 using ColorSchemes
 
@@ -39,7 +37,7 @@ function imagesc(A::AbstractArray;
         cmap = addwhite(EK500)
     end
 
-    if isa(cmap,ColorScheme)
+    if isa(cmap, ColorScheme)
         cmap = cmap.colors
     end
     
@@ -55,17 +53,16 @@ function imagesc(A::AbstractArray;
         vmax = maximum(A[.!isnan.(A)])
     end
 
-    vmin = convert(AbstractFloat, vmin)
-    vmax = convert(AbstractFloat, vmax)
+    vmin = float(vmin)
+    vmax = float(vmax)
 
     n = length(cmap)
 
     g = x -> (clamp(isnan(x) ? vmin : x, vmin, vmax) - vmin) / (vmax - vmin)
-    f = s->clamp(round(Int, (n-1)*g(s))+1, 1, n)
+    #f = s->clamp(round(Int, (n-1)*g(s))+1, 1, n)
+    f = s->cmap[trunc(Int, (n-1)*g(s)) + 1]
 
-    Ai = f.(A)
-    #Ai = mappedarray(f, A) # like f.(A) but does not allocate significant memory
-    IndirectArray(Ai, cmap) # colormap array
+    f.(A)
 
 end
 
